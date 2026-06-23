@@ -38,7 +38,7 @@ The model was designed to answer questions such as:
 - Do updated articles outperform content that has never been updated?
 - How does content age impact search performance?
 - Do monetized articles generate more search traffic?
-- Which articles are experiencing the fastest month-over-month growth?
+- Which articles are experiencing the fastest growth in search traffic?
 - How can search performance data be integrated with CMS metadata for analysis?
 
 ---
@@ -69,7 +69,7 @@ Rows: 54,644
 
 ## Google Search Console
 
-Monthly search performance data exported from Google Search Console.
+Daily search performance data exported from Google Search Console.
 
 Fields included:
 
@@ -115,7 +115,7 @@ Contains:
 
 - Daily clicks
 - Previous month clicks
-- Month-over-month growth
+- Day-over-day growth
 
 ---
 
@@ -156,6 +156,7 @@ MARTS
 ├── FACT_CONTENT_SEARCH_PERFORMANCE
 ├── MART_CONTENT_SEARCH_ANALYSIS
 ```
+![Project Architecture](screenshots/project_architecture.png)
 
 # Key Transformations
 
@@ -172,6 +173,8 @@ Created business-focused attributes including:
 - Content Age Bucket
 - Monetized Flag
 
+![INT_CONTENT_ATTRIBUTES](screenshots/int_content_attributes.png)
+
 Example:
 
 ```sql
@@ -182,7 +185,7 @@ CASE
 END
 ```
 
-## Month-over-Month Growth
+## Growth Calculations
 
 Calculated search growth using window functions.
 
@@ -198,8 +201,8 @@ OVER (
 
 Used to create:
 
-- Previous Month Clicks
-- Month-over-Month Growth %
+- Previous Period Clicks
+- Growth Percentage
 
 ---
 
@@ -215,7 +218,7 @@ Validation checks were performed throughout the modeling process.
 
 ### Fact Validation
 
-- Total Fact Records: 490,372
+- Total Fact Records: 490,371
 - Duplicate URL-Month Records: 0
 
 ### Join Validation
@@ -236,6 +239,8 @@ Investigation of unmatched records revealed a combination of:
 
 ## Updated Content Outperformed Non-Updated Content
 
+![Updated Content Analysis](screenshots/updated_vs_not_updated.png)
+
 | Metric | Updated | Not Updated |
 |----------|----------:|----------:|
 | Avg Monthly Clicks | 7,849 | 3,378 |
@@ -244,6 +249,8 @@ Investigation of unmatched records revealed a combination of:
 **Finding:** Updated content generated more than 2x the average monthly search traffic compared to content that had never been updated.
 
 ## Content Aged 1–3 Years Performed Best
+
+![Content Age Analysis](screenshots/content_age_analysis.png)
 
 | Age Bucket | Avg Monthly Clicks |
 |------------|----------:|
@@ -265,13 +272,7 @@ Investigation of unmatched records revealed a combination of:
 
 ## Top Growing Content
 
-Using month-over-month growth calculations, the model identified content experiencing significant traffic acceleration.
-
-Examples included:
-
-- Recipe content
-- Cooking technique content
-- Grocery-focused content
+Using growth calculations built with SQL window functions, the model identified content experiencing significant traffic acceleration.
 
 This analysis demonstrates how window functions can be used to surface emerging search winners and content momentum trends.
 

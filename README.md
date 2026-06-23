@@ -71,10 +71,12 @@ Rows: 54,644
 
 Daily search performance data exported from Google Search Console.
 
+Although some table names reference "monthly" clicks, the final dataset used in this project contains daily search performance records.
+
 Fields included:
 
 - URL
-- Month
+- Date
 - Clicks
 
 Rows: 490,371
@@ -114,8 +116,8 @@ Contains:
 Contains:
 
 - Daily clicks
-- Previous month clicks
-- Day-over-day growth
+- Previous period clicks
+- Growth percentage
 
 ---
 
@@ -219,7 +221,7 @@ Validation checks were performed throughout the modeling process.
 ### Fact Validation
 
 - Total Fact Records: 490,371
-- Duplicate URL-Month Records: 0
+- Duplicate URL-Date Records: 0
 
 ### Join Validation
 
@@ -243,8 +245,8 @@ Investigation of unmatched records revealed a combination of:
 
 | Metric | Updated | Not Updated |
 |----------|----------:|----------:|
-| Avg Monthly Clicks | 7,849 | 3,378 |
-| Median Monthly Clicks | 1,752 | 1,008 |
+| Avg Clicks | 7,849 | 3,378 |
+| Median Clicks | 1,752 | 1,008 |
 
 **Finding:** Updated content generated more than 2x the average monthly search traffic compared to content that had never been updated.
 
@@ -252,7 +254,7 @@ Investigation of unmatched records revealed a combination of:
 
 ![Content Age Analysis](screenshots/content_age_analysis.png)
 
-| Age Bucket | Avg Monthly Clicks |
+| Age Bucket | Avg Clicks |
 |------------|----------:|
 | 1–3 Years | 7,814 |
 | 5+ Years | 6,247 |

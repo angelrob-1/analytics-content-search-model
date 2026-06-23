@@ -109,11 +109,11 @@ Contains:
 
 ### FACT_CONTENT_SEARCH_PERFORMANCE
 
-**Grain:** 1 row = 1 URL per month
+**Grain:** 1 row = 1 URL per day
 
 Contains:
 
-- Monthly clicks
+- Daily clicks
 - Previous month clicks
 - Month-over-month growth
 
